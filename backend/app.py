@@ -391,3 +391,22 @@ async def upload_dataset(file: UploadFile = File(...)):
         "status": "success",
         "message": f"Successfully loaded uploaded dataset with {len(pipeline.clean_df):,} tracks and {len(pipeline.available_features)} audio features."
     }
+
+# Production / PythonAnywhere single-server frontend serving
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+FRONTEND_DIST = os.path.join(os.path.dirname(BASE_DIR), "frontend", "dist")
+if os.path.exists(FRONTEND_DIST):
+    assets_dir = os.path.join(FRONTEND_DIST, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        if full_path.startswith("api"):
+            raise HTTPException(status_code=404, detail="API route not found")
+        file_path = os.path.join(FRONTEND_DIST, full_path)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+        return FileResponse(os.path.join(FRONTEND_DIST, "index.html"))
