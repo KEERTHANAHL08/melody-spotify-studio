@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #FAF9FF;
+  --surface: #FFFFFF;
+  --primary-lavender: #B8A6E8;
+  --soft-lilac: #E9E1FA;
+  --accent-purple: #8B75C9;
+  --border-subtle: #EEEAF5;
+  --primary-text: #302C3F;
+  --secondary-text: #777487;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-main);
+  color: var(--primary-text);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF9FF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8CCE8;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8A6E8;
+}
+
+/* Glass & pastel card styles */
+.pastel-card {
+  background-color: #FFFFFF;
+  border: 1px solid #EEEAF5;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px -2px rgba(184, 166, 232, 0.08);
+  transition: all 0.25s ease-in-out;
+}
+
+.pastel-card:hover {
+  box-shadow: 0 8px 30px -4px rgba(139, 117, 201, 0.12);
+}
+
+.metric-pill {
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
