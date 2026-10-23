@@ -274,7 +274,7 @@ def get_evaluation():
     if kmeans_manager.elbow_data is None:
         kmeans_manager.compute_elbow_and_silhouette(k_min=2, k_max=10)
 
-    sample_size = min(4000, len(kmeans_manager.scaled_features))
+    sample_size = min(1500, len(kmeans_manager.scaled_features))
     sample_indices = np.random.choice(len(kmeans_manager.scaled_features), size=sample_size, replace=False)
     sil = float(silhouette_score(kmeans_manager.scaled_features[sample_indices], kmeans_manager.labels[sample_indices]))
 

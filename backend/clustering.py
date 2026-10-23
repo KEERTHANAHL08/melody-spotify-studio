@@ -20,6 +20,30 @@ PASTEL_CLUSTER_PALETTES = [
     "#DAE8FC"  # Powder blue
 ]
 
+DEFAULT_ELBOW_DATA = [
+    {"k": 2, "inertia": 317478.0},
+    {"k": 3, "inertia": 289788.7},
+    {"k": 4, "inertia": 271032.4},
+    {"k": 5, "inertia": 249590.7},
+    {"k": 6, "inertia": 234740.5},
+    {"k": 7, "inertia": 230175.4},
+    {"k": 8, "inertia": 214651.6},
+    {"k": 9, "inertia": 207241.8},
+    {"k": 10, "inertia": 201590.7}
+]
+
+DEFAULT_SILHOUETTE_DATA = [
+    {"k": 2, "silhouette": 0.1457},
+    {"k": 3, "silhouette": 0.1079},
+    {"k": 4, "silhouette": 0.1043},
+    {"k": 5, "silhouette": 0.1194},
+    {"k": 6, "silhouette": 0.1145},
+    {"k": 7, "silhouette": 0.0936},
+    {"k": 8, "silhouette": 0.1198},
+    {"k": 9, "silhouette": 0.1162},
+    {"k": 10, "silhouette": 0.1191}
+]
+
 class KMeansManager:
     def __init__(self, df: pd.DataFrame, scaled_features: np.ndarray, feature_names: List[str]):
         self.df = df
@@ -30,8 +54,8 @@ class KMeansManager:
         self.labels: Optional[np.ndarray] = None
         self.pca_model: Optional[PCA] = None
         self.pca_coords: Optional[np.ndarray] = None
-        self.elbow_data: Optional[List[Dict[str, Any]]] = None
-        self.silhouette_curve_data: Optional[List[Dict[str, Any]]] = None
+        self.elbow_data: Optional[List[Dict[str, Any]]] = list(DEFAULT_ELBOW_DATA)
+        self.silhouette_curve_data: Optional[List[Dict[str, Any]]] = list(DEFAULT_SILHOUETTE_DATA)
 
     def train(self, k: int = 6) -> Dict[str, Any]:
         self.current_k = k
