@@ -5,8 +5,6 @@ __pycache__/
 *$py.class
 
 # Build outputs
-frontend/dist/
-dist/
 build/
 
 # OS and IDE files
