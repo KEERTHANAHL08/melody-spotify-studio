@@ -183,20 +183,19 @@ class KMeansManager:
     def compute_elbow_and_silhouette(self, k_min: int = 2, k_max: int = 10) -> Dict[str, Any]:
         elbow = []
         sil_curve = []
-        sample_size = min(3000, len(self.scaled_features))
+        sample_size = min(2500, len(self.scaled_features))
         np.random.seed(42)
         sample_indices = np.random.choice(len(self.scaled_features), size=sample_size, replace=False)
         sample_X = self.scaled_features[sample_indices]
+        scale_factor = len(self.scaled_features) / float(sample_size)
 
         for k in range(k_min, k_max + 1):
-            km = KMeans(n_clusters=k, random_state=42, n_init=5)
-            preds = km.fit_predict(self.scaled_features)
+            km = KMeans(n_clusters=k, random_state=42, n_init=3)
+            preds_sample = km.fit_predict(sample_X)
             elbow.append({
                 "k": k,
-                "inertia": round(float(km.inertia_), 1)
+                "inertia": round(float(km.inertia_ * scale_factor), 1)
             })
-            # Silhouette on sample
-            preds_sample = preds[sample_indices]
             s = float(silhouette_score(sample_X, preds_sample))
             sil_curve.append({
                 "k": k,

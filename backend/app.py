@@ -49,7 +49,6 @@ def init_app_state(file_path: str = DATA_FILE):
 
     kmeans_manager = KMeansManager(clean_df, scaled_features, feature_names)
     kmeans_manager.train(k=6) # initial default 6 clusters
-    kmeans_manager.compute_elbow_and_silhouette(k_min=2, k_max=10) # pre-compute for instant evaluation page
 
     recommender = RecommenderEngine(clean_df, scaled_features, feature_names)
 
